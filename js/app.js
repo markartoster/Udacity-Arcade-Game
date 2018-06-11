@@ -1,11 +1,12 @@
-let positionArray = [70, 140, 210];
+let positionYArray = [70, 140, 210];
+let positionXArray = [-50, -70, -90, -110];
+
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
-
-    this.x = 1;
-    this.y = positionArray[Math.round(Math.random() * (2-0) + 0)];
+    this.x = positionXArray[Math.round(Math.random() * (3-0) + 0)];;
+    this.y = positionYArray[Math.round(Math.random() * (2-0) + 0)];
     this.speed = Math.random() * (100 - 25 ) + 25;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -19,7 +20,13 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
     this.x += this.speed * dt;
+    this.speed += Math.random()*(.5 - .1) + .1;
+    //console.log(allEnemies);
+    if (window.ctx.canvas.width < this.x) {
+      console.log("halo: " + allEnemies.indexOf(this) + "  " + this);
+      allEnemies.splice(allEnemies.indexOf(this), 1);
 
+    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -35,11 +42,7 @@ Enemy.prototype.render = function() {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-let allEnemies = [
-  new Enemy(),
-  new Enemy(),
-  new Enemy()
-];
+let allEnemies = [];
 
 
 
