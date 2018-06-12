@@ -1,5 +1,6 @@
 let positionYArray = [70, 140, 210];
 let positionXArray = [-50, -70, -90, -110];
+let startingPosition = [0,400];
 
 // Enemies our player must avoid
 var Enemy = function() {
@@ -38,12 +39,46 @@ Enemy.prototype.render = function() {
 // This class requires an update(), render() and
 // a handleInput() method.
 
+let Player = function() {
+  this.x = startingPosition[0];
+  this.y = startingPosition[1];
+  this.sprite = 'images/char-boy.png';
+}
 
+Player.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
+Player.prototype.update = function(dt){
+
+  // allEnemies.forEach(function(enemy){
+  //   if ((this.x >= enemy.x && this.x <= (enemy.x + ctx.  && this.y) {
+  //
+  //   }
+  // }); 
+
+}
+
+Player.prototype.handleInput = function(keyNum) {
+  if (keyNum === 'up') {
+    this.y+= -85;
+  }
+  if (keyNum === 'down') {
+    this.y+= 85;
+  }
+  if (keyNum === 'right') {
+    this.x+= 100;
+  }
+  if (keyNum === 'left') {
+    this.x+= -100;
+  }
+}
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 let allEnemies = [];
 
+let player = new Player();
 
 
 // This listens for key presses and sends the keys to your
