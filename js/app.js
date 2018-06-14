@@ -24,7 +24,7 @@ Enemy.prototype.update = function(dt) {
     this.speed += Math.random()*(.5 - .1) + .1;
     //console.log(allEnemies);
     if (window.ctx.canvas.width < this.x) {
-      console.log("halo: " + allEnemies.indexOf(this) + "  " + this);
+      // console.log("halo: " + allEnemies.indexOf(this) + "  " + this);
       allEnemies.splice(allEnemies.indexOf(this), 1);
 
     }
@@ -55,22 +55,26 @@ Player.prototype.update = function(dt){
   //   if ((this.x >= enemy.x && this.x <= (enemy.x + ctx.  && this.y) {
   //
   //   }
-  // }); 
-
+  // });
+  if(this.y <= 40)
+    this.y = startingPosition[1];
 }
 
 Player.prototype.handleInput = function(keyNum) {
   if (keyNum === 'up') {
-    this.y+= -85;
+    this.y+= -82;
   }
   if (keyNum === 'down') {
-    this.y+= 85;
+    if(this.y <399)
+      this.y+= 82;
   }
   if (keyNum === 'right') {
-    this.x+= 100;
+    if(this.x < 400)
+      this.x+= 100;
   }
   if (keyNum === 'left') {
-    this.x+= -100;
+    if(this.x > 50)
+      this.x+= -100;
   }
 }
 // Now instantiate your objects.
