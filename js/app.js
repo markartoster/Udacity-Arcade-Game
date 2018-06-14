@@ -1,7 +1,8 @@
-let positionYArray = [70, 140, 210];
+let positionYArray = [72, 154, 236];
 let positionXArray = [-50, -70, -90, -110];
 let startingPosition = [0,400];
-
+let enemyTest;
+let playerTest;
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -24,9 +25,7 @@ Enemy.prototype.update = function(dt) {
     this.speed += Math.random()*(.5 - .1) + .1;
     //console.log(allEnemies);
     if (window.ctx.canvas.width < this.x) {
-      // console.log("halo: " + allEnemies.indexOf(this) + "  " + this);
       allEnemies.splice(allEnemies.indexOf(this), 1);
-
     }
 };
 
@@ -51,11 +50,22 @@ Player.prototype.render = function() {
 
 Player.prototype.update = function(dt){
 
-  // allEnemies.forEach(function(enemy){
-  //   if ((this.x >= enemy.x && this.x <= (enemy.x + ctx.  && this.y) {
-  //
-  //   }
-  // });
+  allEnemies.forEach(function(enemy){
+
+    if (((player.x >= enemy.x) &&
+       (player.x + 20 <= (enemy.x + window.Resources.get("images/enemy-bug.png").width))  &&
+       (player.y == enemy.y ))
+       ||
+       (((player.x < enemy.x) &&
+       (player.x >= (enemy.x - window.Resources.get("images/char-boy.png").width * .8 ))) &&
+       ((player.y == enemy.y )))) {
+         player.x = startingPosition[0];
+         player.y = startingPosition[1];
+
+    }
+    playerTest = player.y;
+    enemyTest = enemy.y;
+  });
   if(this.y <= 40)
     this.y = startingPosition[1];
 }

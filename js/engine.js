@@ -172,7 +172,7 @@ var Engine = (function(global) {
 
     function addEnemies(){
       setTimeout(function(){
-        if(allEnemies.length <= 4){
+        if(allEnemies.length <= 0){
             allEnemies.push(new Enemy());
             addEnemies();
         }
