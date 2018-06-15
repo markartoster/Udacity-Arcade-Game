@@ -1,8 +1,8 @@
 let positionYArray = [72, 154, 236];
 let positionXArray = [-50, -70, -90, -110];
+let stoneTiles = [[]];
 let startingPosition = [0,400];
-let enemyTest;
-let playerTest;
+
 // Enemies our player must avoid
 var Enemy = function() {
     // Variables applied to each of our instances go here,
@@ -53,7 +53,7 @@ Player.prototype.update = function(dt){
   allEnemies.forEach(function(enemy){
 
     if (((player.x >= enemy.x) &&
-       (player.x + 20 <= (enemy.x + window.Resources.get("images/enemy-bug.png").width))  &&
+       (player.x +20 <= (enemy.x + window.Resources.get("images/enemy-bug.png").width))  &&
        (player.y == enemy.y ))
        ||
        (((player.x < enemy.x) &&
@@ -61,18 +61,18 @@ Player.prototype.update = function(dt){
        ((player.y == enemy.y )))) {
          player.x = startingPosition[0];
          player.y = startingPosition[1];
-
     }
-    playerTest = player.y;
-    enemyTest = enemy.y;
+    console.log(`X: ${player.x}, Y: ${player.y}`);
   });
-  if(this.y <= 40)
+  if(this.y <= 40){
+    this.x = startingPosition[0];
     this.y = startingPosition[1];
+  }
 }
 
 Player.prototype.handleInput = function(keyNum) {
   if (keyNum === 'up') {
-    this.y+= -82;
+    this.y += -82;
   }
   if (keyNum === 'down') {
     if(this.y <399)
