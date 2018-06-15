@@ -1,6 +1,8 @@
 let positionYArray = [72, 154, 236];
 let positionXArray = [-50, -70, -90, -110];
-let stoneTiles = [[]];
+let stoneTiles = [[0,72],[100,72],[200,72],[300,72],[400,72],
+                  [0,154],[100,154],[200,154],[300,154],[400,154]
+                  [0,236],[100,236],[200,236],[300,236],[400,236]];
 let startingPosition = [0,400];
 
 // Enemies our player must avoid
@@ -62,9 +64,10 @@ Player.prototype.update = function(dt){
          player.x = startingPosition[0];
          player.y = startingPosition[1];
     }
-    console.log(`X: ${player.x}, Y: ${player.y}`);
+
   });
-  if(this.y <= 40){
+  console.log(`X: ${player.x}, Y: ${player.y}`);
+  if(this.y <= 40) {
     this.x = startingPosition[0];
     this.y = startingPosition[1];
   }
@@ -90,11 +93,23 @@ Player.prototype.handleInput = function(keyNum) {
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
+
+
+var BlueGem = function(){
+  this.x = stoneTiles[Math.round(Math.random() * (stoneTiles.length - 0) + 0)][0];
+  this.y = stoneTiles[Math.round(Math.random() * (stoneTiles.length - 0) + 0)][1];
+  this.score = 10;
+  this.sprite = 'images/Blue-Gem.png';
+}
+
+BlueGem.prototype.render = function() {
+  ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+}
+
 let allEnemies = [];
 
 let player = new Player();
-
-
+let blueGem = new BlueGem();
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {

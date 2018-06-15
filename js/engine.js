@@ -160,6 +160,7 @@ var Engine = (function(global) {
         });
 
         player.render();
+        blueGem.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -172,7 +173,7 @@ var Engine = (function(global) {
 
     function addEnemies(){
       setTimeout(function(){
-        if(allEnemies.length <= 0){
+        if(allEnemies.length < 0){
             allEnemies.push(new Enemy());
             addEnemies();
         }
