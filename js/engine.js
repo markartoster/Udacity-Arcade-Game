@@ -176,7 +176,7 @@ var Engine = (function(global) {
 
     function addEnemies(){
       setTimeout(function(){
-        if(allEnemies.length < maxEnemies){
+        if(allEnemies.length < Math.floor(maxEnemies)){
             allEnemies.push(new Enemy());
             addEnemies();
         }

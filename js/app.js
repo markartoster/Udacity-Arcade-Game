@@ -1,5 +1,5 @@
-// const canvasElement= window.ctx.canvas;
 
+//Positions
 let positionYArray = [72, 154, 236];
 let positionXArray = [-50, -70, -90, -110];
 // where: [x,y]
@@ -24,9 +24,15 @@ let stoneTiles = [[0,72],
                   [300,236],
                   [400,236]];
 let startingPosition = [0,400];
-let score = 0;
+
+//Game Objects
 let maxEnemies = 4;
 let maxStars = 1;
+
+//Difficulty spikes
+let spikes = [500, 1000, 1500, 2000, 2500, 5000, 10000];
+let difficultyFlag = 0;
+//Logic
 let isStarCollected = false;
 
 // Enemies our player must avoid
@@ -67,14 +73,21 @@ Enemy.prototype.render = function() {
 let Player = function() {
   this.x = startingPosition[0];
   this.y = startingPosition[1];
+  this.score = 0;
+  this.lives = 3;
   this.sprite = 'images/char-boy.png';
 }
 
 Player.prototype.render = function() {
+
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
 Player.prototype.update = function(dt){
+
+  $("#score").text(this.score);
+  $("#lives").text(this.lives);
+
 
   allEnemies.forEach(function(enemy){
 
@@ -85,6 +98,7 @@ Player.prototype.update = function(dt){
        (((player.x < enemy.x) &&
        (player.x >= (enemy.x - window.Resources.get("images/char-boy.png").width * .8 ))) &&
        ((player.y == enemy.y )))) {
+         player.lives -= 1;
          player.x = startingPosition[0];
          player.y = startingPosition[1];
     }
@@ -103,11 +117,13 @@ Player.prototype.update = function(dt){
     this.x = startingPosition[0];
     this.y = startingPosition[1];
     if (isStarCollected) {
+      console.log(this.score);
       isStarCollected = false;
-      score += 100;
+      this.score += 100;
     } else {
-      score += 1;
+      this.score += 1;
     }
+    difficultyUp();
   }
 }
 
@@ -164,6 +180,51 @@ document.addEventListener('keyup', function(e) {
     player.handleInput(allowedKeys[e.keyCode]);
 });
 
-// $(window).onReady(function(){
-//
+
+const difficultyUp = function() {
+  if (player.score >= spikes[0] && player.score < spikes[1] && difficultyFlag == 0) {
+    maxEnemies+=1;
+    allEnemies.forEach(function(enemy){
+      enemy.speed +=.02;
+    });
+    difficultyFlag += 1;
+  } else if (player.score >= spikes[1] && player.score < spikes[2] && difficultyFlag == 1) {
+    allEnemies.forEach(function(enemy){
+      enemy.speed +=.02;
+    });
+    difficultyFlag += 1;
+  } else if (player.score >= spikes[2] && player.score < spikes[3] && difficultyFlag == 2) {
+    maxEnemies +=1;
+    allEnemies.forEach(function(enemy){
+      enemy.speed +=.02;
+    });
+    difficultyFlag += 1;
+  } else if (player.score >= spikes[3] && player.score < spikes[4] && difficultyFlag == 3) {
+    allEnemies.forEach(function(enemy){
+      enemy.speed +=.02;
+    });
+    difficultyFlag += 1;
+  } else if (player.score >= spikes[4] && player.score < spikes[5] && difficultyFlag == 4) {
+    maxEnemies +=1;
+    allEnemies.forEach(function(enemy){
+      enemy.speed +=.02;
+    });
+    difficultyFlag += 1;
+  } else if (player.score >= spikes[5] && player.score < spikes[6] && difficultyFlag == 5) {
+    maxEnemies +=1;
+    allEnemies.forEach(function(enemy){
+      enemy.speed +=.01;
+    });
+    difficultyFlag += 1;
+  } else if (player.score >= spikes[6] && player.score < (player.score + 1000) && difficultyFlag == 6) {
+    maxEnemies +=.5;
+    allEnemies.forEach(function(enemy){
+      enemy.speed +=.01;
+    });
+    difficultyFlag += 1;
+  }
+};
+// $(document).ready(function(){
+//   $("#score").append(this.score);
+//   $("#lives").append(this.lives);
 // });

@@ -6,7 +6,7 @@ body {
 
   .score {
     display: inline-block;
-    transform: translateX(-500%);
+    transform: translateX(-100%);
     &--icon{
       color: gold;
 
@@ -18,7 +18,7 @@ body {
 
   .lives {
     display: inline-block;
-    transform: translateX(500%);
+    transform: translateX(100%);
     &--icon{
       color: red;
 
