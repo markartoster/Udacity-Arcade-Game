@@ -1,6 +1,13 @@
+// const canvasElement= window.ctx.canvas;
+
 let positionYArray = [72, 154, 236];
 let positionXArray = [-50, -70, -90, -110];
 // where: [x,y]
+let waterTiles = [[0,-10],
+                  [100,-10],
+                  [200,-10],
+                  [300,-10],
+                  [400,-10]]
 let stoneTiles = [[0,72],
                   [100,72],
                   [200,72],
@@ -91,10 +98,16 @@ Player.prototype.update = function(dt){
     }
   })
 
-  // console.log(`X: ${player.x}, Y: ${player.y}`);
+  //console.log(`X: ${player.x}, Y: ${player.y}`);
   if(this.y <= 40) {
     this.x = startingPosition[0];
     this.y = startingPosition[1];
+    if (isStarCollected) {
+      isStarCollected = false;
+      score += 100;
+    } else {
+      score += 1;
+    }
   }
 }
 
@@ -150,3 +163,7 @@ document.addEventListener('keyup', function(e) {
 
     player.handleInput(allowedKeys[e.keyCode]);
 });
+
+// $(window).onReady(function(){
+//
+// });

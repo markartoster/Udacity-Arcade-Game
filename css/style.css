@@ -1,3 +1,1 @@
-body {
-    text-align: center;
-}
+body{text-align:center}.ui .score{display:inline-block;transform:translateX(-500%)}.ui .score--icon{color:gold;font-size:1.5rem;font-weight:700}.ui .lives{display:inline-block;transform:translateX(500%)}.ui .lives--icon{color:red;font-size:1.5rem;font-weight:700}

@@ -1,0 +1,30 @@
+body {
+  text-align: center;
+}
+
+.ui {
+
+  .score {
+    display: inline-block;
+    transform: translateX(-500%);
+    &--icon{
+      color: gold;
+
+      font-size: 1.5rem;
+      font-weight: 700;
+
+    }
+  }
+
+  .lives {
+    display: inline-block;
+    transform: translateX(500%);
+    &--icon{
+      color: red;
+
+      font-size: 1.5rem;
+      font-weight: 700;
+
+    }
+  }
+}
