@@ -94,7 +94,7 @@ var Engine = (function(global) {
     function updateEntities(dt) {
 
         addEnemies();
-
+        addStars();
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
         });
@@ -146,7 +146,6 @@ var Engine = (function(global) {
         }
 
         renderEntities();
-        star.render();
     }
 
     /* This function is called by the render function and is called on each game
@@ -161,6 +160,9 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
+        allStars.forEach(function(star) {
+          star.render();
+        });
         player.render();
     }
 
@@ -174,11 +176,20 @@ var Engine = (function(global) {
 
     function addEnemies(){
       setTimeout(function(){
-        if(allEnemies.length < 0){
+        if(allEnemies.length < maxEnemies){
             allEnemies.push(new Enemy());
             addEnemies();
         }
-      },100);
+      }, 100);
+    }
+
+    function addStars(){
+      if (!isStarCollected) {
+        if(allStars.length < maxStars){
+            allStars.push(new Star());
+        }
+      }
+
     }
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when

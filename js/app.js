@@ -1,5 +1,6 @@
 let positionYArray = [72, 154, 236];
 let positionXArray = [-50, -70, -90, -110];
+// where: [x,y]
 let stoneTiles = [[0,72],
                   [100,72],
                   [200,72],
@@ -16,6 +17,10 @@ let stoneTiles = [[0,72],
                   [300,236],
                   [400,236]];
 let startingPosition = [0,400];
+let score = 0;
+let maxEnemies = 4;
+let maxStars = 1;
+let isStarCollected = false;
 
 // Enemies our player must avoid
 var Enemy = function() {
@@ -78,6 +83,14 @@ Player.prototype.update = function(dt){
     }
 
   });
+  allStars.forEach(function(star){
+    if(player.x == star.x && player.y == star.y){
+      console.log("works");
+      isStarCollected = true;
+      allStars.splice(0, 1);
+    }
+  })
+
   // console.log(`X: ${player.x}, Y: ${player.y}`);
   if(this.y <= 40) {
     this.x = startingPosition[0];
@@ -108,8 +121,8 @@ Player.prototype.handleInput = function(keyNum) {
 
 
 var Star = function(){
-  this.x = stoneTiles[Math.round(Math.random() * (stoneTiles.length - 0) + 0)][0];
-  this.y = stoneTiles[Math.round(Math.random() * (stoneTiles.length - 0) + 0)][1];
+  this.x = stoneTiles[Math.round(Math.random() * ((stoneTiles.length - 1) - 0) + 0)][0];
+  this.y = stoneTiles[Math.round(Math.random() * ((stoneTiles.length - 1) - 0) + 0)][1];
   this.score = 10;
   this.sprite = 'images/Star.png';
 }
@@ -118,10 +131,13 @@ Star.prototype.render = function() {
   ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 }
 
-let allEnemies = [];
 
+
+
+let allEnemies = [];
+let allStars = [];
 let player = new Player();
-let star = new Star();
+
 // This listens for key presses and sends the keys to your
 // Player.handleInput() method. You don't need to modify this.
 document.addEventListener('keyup', function(e) {
