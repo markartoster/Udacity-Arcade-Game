@@ -56,6 +56,7 @@ var Engine = (function(global) {
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
+
     }
 
     /* This function does some initial setup that should only occur once,
@@ -66,6 +67,7 @@ var Engine = (function(global) {
         reset();
         lastTime = Date.now();
         main();
+
     }
 
     /* This function is called by main (our game loop) and itself calls all
@@ -144,6 +146,7 @@ var Engine = (function(global) {
         }
 
         renderEntities();
+        star.render();
     }
 
     /* This function is called by the render function and is called on each game
@@ -158,9 +161,7 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
-
         player.render();
-        blueGem.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -189,7 +190,7 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/Gem-Blue.png'
+        'images/Star.png'
     ]);
     Resources.onReady(init);
 
