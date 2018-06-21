@@ -171,9 +171,11 @@ var Engine = (function(global) {
      * those sorts of things. It's only called once by the init() method.
      */
     function reset() {
-        // noop
-    }
 
+    }
+    /* Adds Enemies to the game depending on Maximum Enemy count, get called in
+     * update function to check for missing enemies
+     */
     function addEnemies(){
       setTimeout(function(){
         if(allEnemies.length < Math.floor(maxEnemies)){
@@ -183,6 +185,10 @@ var Engine = (function(global) {
       }, 100);
     }
 
+    /* Adds Stars to the game depending on Maximum Stars count, get called in
+     * update function to check for missing stars(though game predicts only one
+     * star to be during gameplay)
+     */
     function addStars(){
       if (!isStarCollected) {
         if(allStars.length < maxStars){
