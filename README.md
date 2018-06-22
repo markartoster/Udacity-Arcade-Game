@@ -1,6 +1,29 @@
 frontend-nanodegree-arcade-game
 ===============================
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+How to play
+-----------
+To score points collect Star and enter any water tile:
+* 100 points - entering water **with** star collected
+* 1 point - entering water
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+Avoid enemies, each hit costs you one life. Losing all results in game over.
+
+Hints
+-----
+1. When star is in fishy location, be patient and wait for opening.
+2. You can't restore your lives, so each one counts.
+3. More points you have, more difficult game becomes.
+
+How to launch game locally
+--------------------------
+Download or clone repository, open **index.html** in your browser.
+
+Contributing
+------------
+Starter code/assets/loop engine belong to udacity as they are part of **Front-end Nanodegree Google Scholarship** 
+
+Dependencies
+------------
+* Font Awesome - https://fontawesome.com/
+* jQuery - https://jquery.com/
