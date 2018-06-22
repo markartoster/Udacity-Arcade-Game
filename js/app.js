@@ -32,6 +32,7 @@ let maxStars = 1;
 //Difficulty spikes
 let spikes = [500, 1000, 1500, 2000, 2500, 5000, 10000];
 let difficultyFlag = 0;
+let pointsOver10kCounter = 0;
 let addedSpeed = 0;
 
 //Logic
@@ -127,8 +128,14 @@ Player.prototype.update = function(dt){
       console.log(this.score);
       isStarCollected = false;
       this.score += 100;
+      if(this.score >= spikes[6]){
+        pointsOver10kCounter +=100;
+      }
     } else {
       this.score += 1;
+      if(this.score >= spikes[6]){
+        pointsOver10kCounter +=1;
+      }
     }
     difficultyUp();
   }
@@ -229,13 +236,21 @@ const difficultyUp = function() {
     });
     addedSpeed += .01;
     difficultyFlag += 1;
-  } else if (player.score >= spikes[6] && player.score < (player.score + 1000) && difficultyFlag == 6) {
+  } else if (player.score >= spikes[6] && pointsOver10kCounter >= 1000 && difficultyFlag == 6) {
     maxEnemies +=.5;
     allEnemies.forEach(function(enemy){
       enemy.speed +=.01;
     });
     addedSpeed += .01;
+    pointsOver10kCounter = 0;
     difficultyFlag += 1;
+  } else if (pointsOver10kCounter >= 1000 && difficultyFlag == 7) {
+    maxEnemies +=.5;
+    allEnemies.forEach(function(enemy){
+      enemy.speed +=.01;
+    });
+    addedSpeed += .01;
+    pointsOver10kCounter = 0;
   }
 };
 
